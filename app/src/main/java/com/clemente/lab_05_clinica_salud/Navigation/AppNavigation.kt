@@ -16,10 +16,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import kotlinx.coroutines.launch
+import com.clemente.lab_05_clinica_salud.Models.Cita
+import com.clemente.lab_05_clinica_salud.Models.citas
 import com.clemente.lab_05_clinica_salud.Models.medicos
 import com.clemente.lab_05_clinica_salud.Screens.AgendarCitaScreen
 import com.clemente.lab_05_clinica_salud.Screens.ConfirmacionScreen
 import com.clemente.lab_05_clinica_salud.Screens.InicioScreen
+import com.clemente.lab_05_clinica_salud.Screens.MisCitasScreen
 import com.clemente.lab_05_clinica_salud.Screens.PerfilMedicoScreen
 
 
@@ -127,6 +130,12 @@ fun AppNavigation() {
             }
 
             composable(
+                route = "mis_citas"
+            ) {
+                MisCitasScreen()
+            }
+
+            composable(
                 route = "perfil/{medicoId}",
                 arguments = listOf(
                     navArgument("medicoId") {
@@ -163,6 +172,14 @@ fun AppNavigation() {
                 AgendarCitaScreen(
                     medico = medico,
                     onConfirmarClick = { fecha, hora ->
+                        citas.add(
+                            Cita(
+                                medico = medico.nombre,
+                                fecha = fecha,
+                                hora = hora,
+                                estado = "Confirmada"
+                            )
+                        )
                         navController.navigate(
                             "confirmacion/$medicoId/${Uri.encode(fecha)}/${Uri.encode(hora)}"
                         )
@@ -200,7 +217,9 @@ fun AppNavigation() {
                     medico = medico,
                     fecha = fecha,
                     hora = hora,
-                    onVolverInicio = {}
+                    onVolverInicio = {
+                        navController.navigate("mis_citas")
+                    }
                 )
             }
         }
