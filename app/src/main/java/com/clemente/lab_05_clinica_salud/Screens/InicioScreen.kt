@@ -16,8 +16,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.clemente.lab_05_clinica_salud.Components.MedicoCard
@@ -38,9 +40,12 @@ fun InicioScreen(
                 title = {
 
                     Column() {
-                        Text("Clinica Salud+")
+                        Text(text= "Clinica Salud+",
+                            color = Color(255, 255, 255, 255))
                         Text(text = "Hola clemente",
-                            fontSize = 15.sp)
+                            fontSize = 15.sp,
+                            color = Color(255, 255, 255, 255)
+                        )
                     }
                 },
                 navigationIcon = {
@@ -52,7 +57,11 @@ fun InicioScreen(
                             contentDescription = "Abrir menú"
                         )
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(110, 15, 124, 255)
+                )
+
             )
         }
     ) { paddingValues ->
