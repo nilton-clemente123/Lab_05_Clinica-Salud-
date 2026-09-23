@@ -54,7 +54,8 @@ fun InicioScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Menu,
-                            contentDescription = "Abrir menú"
+                            contentDescription = "Abrir menú",
+                            tint = Color.White
                         )
                     }
                 },

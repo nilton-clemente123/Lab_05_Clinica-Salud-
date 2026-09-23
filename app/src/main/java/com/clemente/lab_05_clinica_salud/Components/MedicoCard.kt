@@ -2,6 +2,7 @@ package com.clemente.lab_05_clinica_salud.Components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,38 +38,43 @@ fun MedicoCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Box(
-                modifier = Modifier
-                    .size(56.dp)
-                    .clip(CircleShape)
-                    .background(Color(0xFFE0E0E0)),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Foto del médico",
-                    tint = Color(0xFF9E9E9E),
-                    modifier = Modifier.size(32.dp)
-                )
+
+            Row() {
+                Box(
+                    modifier = Modifier
+                        .size(56.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFFE0E0E0)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Foto del médico",
+                        tint = Color(0xFF9E9E9E),
+                        modifier = Modifier.size(32.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                Column {
+                    Text(
+                        text = medico.nombre
+                    )
+
+                    Text(
+                        text = medico.especialidad
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.width(16.dp))
 
-            Column {
-                Text(
-                    text = medico.nombre
-                )
-
-                Text(
-                    text = medico.especialidad
-                )
-
-                Text(
-                    text = "⭐ ${medico.calificacion}"
-                )
-            }
+            Text(
+                text = "⭐ ${medico.calificacion}"
+            )
         }
 
     }
