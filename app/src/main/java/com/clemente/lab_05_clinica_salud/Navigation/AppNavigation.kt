@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.clemente.lab_05_clinica_salud.Models.medicos
+import com.clemente.lab_05_clinica_salud.Screens.AgendarCitaScreen
 import com.clemente.lab_05_clinica_salud.Screens.InicioScreen
 import com.clemente.lab_05_clinica_salud.Screens.PerfilMedicoScreen
 
@@ -46,8 +47,29 @@ fun AppNavigation() {
 
             val medico = medicos.first { it.id == medicoId }
 
-            PerfilMedicoScreen(medico = medico)
+            PerfilMedicoScreen(medico = medico, onAgendarClick = {
+                navController.navigate("agendar/${medicoId}")
+            })
 
+        }
+
+        composable(
+            route = "agendar/{medicoId}",
+            arguments = listOf(
+                navArgument("medicoId") {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry ->
+
+            val medicoId =
+                backStackEntry.arguments?.getInt("medicoId") ?: 0
+
+            val medico = medicos.first { it.id == medicoId }
+
+            AgendarCitaScreen(
+               medico
+            )
         }
     }
 }

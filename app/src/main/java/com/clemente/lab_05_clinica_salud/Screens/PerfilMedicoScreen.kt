@@ -20,7 +20,9 @@ import com.clemente.lab_05_clinica_salud.Models.Medico
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PerfilMedicoScreen(
-    medico: Medico
+    medico: Medico,
+    onAgendarClick: (Medico) -> Unit
+
 ) {
     Scaffold(
         topBar = {
@@ -29,7 +31,20 @@ fun PerfilMedicoScreen(
                     Text("Perfil del médico")
                 }
             )
+        },
+
+        bottomBar = {
+            Button(
+                onClick = {
+                    onAgendarClick(medico)
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Agendar cita")
+            }
         }
+
+
     ) { paddingValues ->
 
         Column(
@@ -55,14 +70,6 @@ fun PerfilMedicoScreen(
                 modifier = Modifier.height(24.dp)
             )
 
-            Button(
-                onClick = {
-
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Agendar cita")
-            }
         }
     }
 }
