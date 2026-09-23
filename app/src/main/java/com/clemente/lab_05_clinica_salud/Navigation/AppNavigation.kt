@@ -21,8 +21,10 @@ import com.clemente.lab_05_clinica_salud.Models.citas
 import com.clemente.lab_05_clinica_salud.Models.medicos
 import com.clemente.lab_05_clinica_salud.Screens.AgendarCitaScreen
 import com.clemente.lab_05_clinica_salud.Screens.ConfirmacionScreen
+import com.clemente.lab_05_clinica_salud.Screens.HistorialMedicoScreen
 import com.clemente.lab_05_clinica_salud.Screens.InicioScreen
 import com.clemente.lab_05_clinica_salud.Screens.MisCitasScreen
+import com.clemente.lab_05_clinica_salud.Screens.PerfilPacienteScreen
 import com.clemente.lab_05_clinica_salud.Screens.PerfilMedicoScreen
 
 
@@ -133,6 +135,18 @@ fun AppNavigation() {
                 route = "mis_citas"
             ) {
                 MisCitasScreen()
+            }
+
+            composable(
+                route = "historial"
+            ) {
+                HistorialMedicoScreen()
+            }
+
+            composable(
+                route = "perfil_usuario"
+            ) {
+                PerfilPacienteScreen()
             }
 
             composable(
