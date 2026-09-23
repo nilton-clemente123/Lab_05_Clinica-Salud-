@@ -34,10 +34,6 @@ fun InicioScreen(){
                         Text(text = "Hola clemente",
                             fontSize = 15.sp)
                     }
-
-
-
-
                 }
             )
         }
