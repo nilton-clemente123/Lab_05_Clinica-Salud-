@@ -17,12 +17,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.clemente.lab_05_clinica_salud.Components.MedicoCard
+import com.clemente.lab_05_clinica_salud.Models.Medico
 import com.clemente.lab_05_clinica_salud.Models.especialidades
 import com.clemente.lab_05_clinica_salud.Models.medicos
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InicioScreen(){
+fun InicioScreen(
+    onMedicoClick: (Medico) -> Unit
+){
     Scaffold(
         topBar = {
             TopAppBar(
@@ -67,7 +70,12 @@ fun InicioScreen(){
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(medicos) { medico ->
-                    MedicoCard(medico)
+                    MedicoCard(
+                        medico = medico,
+                        onClick = {
+                            onMedicoClick(medico)
+                        }
+                    )
                 }
             }
         }

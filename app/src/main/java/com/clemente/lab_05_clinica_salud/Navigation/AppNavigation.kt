@@ -1,0 +1,53 @@
+package com.clemente.lab_05_clinica_salud.Navigation
+
+import android.R.attr.type
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.clemente.lab_05_clinica_salud.Models.medicos
+import com.clemente.lab_05_clinica_salud.Screens.InicioScreen
+import com.clemente.lab_05_clinica_salud.Screens.PerfilMedicoScreen
+
+
+@Composable
+fun AppNavigation() {
+
+    val navController = rememberNavController()
+
+    NavHost(
+        navController = navController,
+        startDestination = "inicio"
+    ) {
+
+        composable(
+            route = "inicio"
+        ) {
+            InicioScreen(
+                onMedicoClick = { medico ->
+                    navController.navigate("perfil/${medico.id}")
+                }
+            )
+        }
+
+        composable(
+            route = "perfil/{medicoId}",
+            arguments = listOf(
+                navArgument("medicoId") {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry ->
+
+            val medicoId =
+                backStackEntry.arguments?.getInt("medicoId") ?: 0
+
+            val medico = medicos.first { it.id == medicoId }
+
+            PerfilMedicoScreen(medico = medico)
+
+        }
+    }
+}
