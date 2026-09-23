@@ -33,7 +33,10 @@ val horarios = listOf(
 )
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AgendarCitaScreen(medico: Medico) {
+fun AgendarCitaScreen(
+    medico: Medico,
+    onConfirmarClick: (String, String) -> Unit
+) {
 
     var fechaSeleccionada by remember {
         mutableStateOf<String?>(null)
@@ -47,7 +50,7 @@ fun AgendarCitaScreen(medico: Medico) {
         topBar = {
             TopAppBar(
                 title = {
-                    Text("AgendarCita")
+                    Text("Agendar Cita")
                 }
             )
         },
@@ -55,8 +58,12 @@ fun AgendarCitaScreen(medico: Medico) {
         bottomBar = {
             Button(
                 onClick = {
-
-                }
+                    onConfirmarClick(
+                        fechaSeleccionada ?: "",
+                        horaSeleccionada ?: ""
+                    )
+                },
+                enabled = fechaSeleccionada != null && horaSeleccionada != null
             ) {
                 Text("Confirmar cita")
             }
@@ -92,7 +99,8 @@ fun AgendarCitaScreen(medico: Medico) {
                     Button(
                         onClick = {
                             horaSeleccionada = horario
-                        }
+                        },
+
                     ) {
                         Text(
                             text = horario
