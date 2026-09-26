@@ -2,18 +2,16 @@ package com.clemente.lab_05_clinica_salud.Screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -27,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -81,35 +80,36 @@ fun MisCitasScreen(
                     Card(
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Column(
-                            modifier = Modifier.padding(16.dp)
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Text(text = cita.medico)
-                            Text(text = "Fecha: ${cita.fecha}")
-                            Text(text = "Hora: ${cita.hora}")
-                            Text(
-                                text = cita.estado,
-                                color = if (cita.estado == "Cancelada") {
-                                    Color(0xFFD32F2F)
-                                } else {
-                                    Color(0xFF4CAF50)
-                                }
-                            )
+                            Column {
+                                Text(text = cita.medico)
+                                Text(text = "Fecha: ${cita.fecha}")
+                                Text(text = "Hora: ${cita.hora}")
+                                Text(
+                                    text = cita.estado,
+                                    color = if (cita.estado == "Cancelada") {
+                                        Color(0xFFD32F2F)
+                                    } else {
+                                        Color(0xFF4CAF50)
+                                    }
+                                )
+                            }
 
                             if (cita.estado != "Cancelada") {
-                                Spacer(modifier = Modifier.height(12.dp))
-
-                                Button(
-                                    onClick = { citaPendiente = cita },
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = Color(110, 15, 124, 255),
-                                        contentColor = Color.White
-                                    ),
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(48.dp)
+                                IconButton(
+                                    onClick = { citaPendiente = cita }
                                 ) {
-                                    Text("Cancelar cita")
+                                    Icon(
+                                        imageVector = Icons.Default.Close,
+                                        contentDescription = "Cancelar cita",
+                                        tint = Color(0xFFD32F2F)
+                                    )
                                 }
                             }
                         }
