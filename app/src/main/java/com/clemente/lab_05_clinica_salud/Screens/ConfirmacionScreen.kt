@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -116,7 +117,11 @@ fun ConfirmacionScreen(
 
             Button(
                 onClick = { onVolverInicio() },
-                modifier = Modifier.fillMaxWidth()
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(110, 15, 124, 255),
+                    contentColor = Color.White
+                ),
+                modifier = Modifier.fillMaxWidth().height(55.dp)
             ) {
                 Text("Ver mis citas")
             }

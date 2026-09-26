@@ -80,7 +80,7 @@ fun AgendarCitaScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(0.dp,24.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Button(
@@ -90,7 +90,12 @@ fun AgendarCitaScreen(
                             horaSeleccionada ?: ""
                         )
                     },
-                    enabled = fechaSeleccionada != null && horaSeleccionada != null
+                    enabled = fechaSeleccionada != null && horaSeleccionada != null,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(110, 15, 124, 255),
+                        contentColor = Color.White
+                    ),
+                    modifier = Modifier.fillMaxWidth().height(55.dp)
                 ) {
                     Text("Confirmar cita")
                 }
