@@ -2,13 +2,17 @@ package com.clemente.lab_05_clinica_salud.Screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -18,13 +22,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.clemente.lab_05_clinica_salud.Models.Cita
 import com.clemente.lab_05_clinica_salud.Models.citas
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MisCitasScreen(onBackClick: () -> Unit) {
+fun MisCitasScreen(
+    onBackClick: () -> Unit,
+    onCancelarCita: (Cita) -> Unit
+) {
 
     Scaffold(
         topBar = {
@@ -70,7 +79,31 @@ fun MisCitasScreen(onBackClick: () -> Unit) {
                             Text(text = cita.medico)
                             Text(text = "Fecha: ${cita.fecha}")
                             Text(text = "Hora: ${cita.hora}")
-                            Text(text = cita.estado)
+                            Text(
+                                text = cita.estado,
+                                color = if (cita.estado == "Cancelada") {
+                                    Color(0xFFD32F2F)
+                                } else {
+                                    Color(0xFF4CAF50)
+                                }
+                            )
+
+                            if (cita.estado != "Cancelada") {
+                                Spacer(modifier = Modifier.height(12.dp))
+
+                                Button(
+                                    onClick = { onCancelarCita(cita) },
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color(110, 15, 124, 255),
+                                        contentColor = Color.White
+                                    ),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(48.dp)
+                                ) {
+                                    Text("Cancelar cita")
+                                }
+                            }
                         }
                     }
                 }

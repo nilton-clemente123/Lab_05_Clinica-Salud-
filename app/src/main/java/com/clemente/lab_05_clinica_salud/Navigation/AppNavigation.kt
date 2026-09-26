@@ -29,8 +29,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import kotlinx.coroutines.launch
-import com.clemente.lab_05_clinica_salud.Models.Cita
-import com.clemente.lab_05_clinica_salud.Models.citas
+import com.clemente.lab_05_clinica_salud.Models.agendarCita
+import com.clemente.lab_05_clinica_salud.Models.cancelarCita
 import com.clemente.lab_05_clinica_salud.Models.medicos
 import com.clemente.lab_05_clinica_salud.Screens.AgendarCitaScreen
 import com.clemente.lab_05_clinica_salud.Screens.ConfirmacionScreen
@@ -170,6 +170,9 @@ fun AppNavigation() {
                 MisCitasScreen(
                     onBackClick = {
                         navController.popBackStack()
+                    },
+                    onCancelarCita = { cita ->
+                        cancelarCita(cita.id)
                     }
                 )
             }
@@ -237,13 +240,10 @@ fun AppNavigation() {
                 AgendarCitaScreen(
                     medico = medico,
                     onConfirmarClick = { fecha, hora ->
-                        citas.add(
-                            Cita(
-                                medico = medico.nombre,
-                                fecha = fecha,
-                                hora = hora,
-                                estado = "Confirmada"
-                            )
+                        agendarCita(
+                            medico = medico.nombre,
+                            fecha = fecha,
+                            hora = hora
                         )
                         navController.navigate(
                             "confirmacion/$medicoId/${Uri.encode(fecha)}/${Uri.encode(hora)}"
